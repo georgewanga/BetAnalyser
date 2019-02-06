@@ -1,0 +1,29 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta http-equiv="refresh" content="10"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% include 'base/css.html' %}
+
+    <title>{% block page_title %}{% endblock page_title %} | Bet Analyser Kenya </title>
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
+</head>
+
+<body>
+    <div class="container-fluid">
+        {% block body %}{% endblock body %}
+    </div>
+
+    {% include 'base/js.html' %}
+    <a href="/admin">admin</a>
+
+</body>
+
+</html>

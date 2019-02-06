@@ -1,0 +1,49 @@
+{% load static %}
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<!-- Icons -->
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+  feather.replace()
+  $(document).ready(function () {
+
+    // Setup - add a text input to each footer cell
+    $('#example tfoot th').each(function () {
+      var title = $(this).text();
+      $(this).html('<input type="text" class="form-control mx-auto form-control-sm" placeholder="Search ' + title + '" />');
+    });
+
+    // DataTable
+    var table = $('#example').DataTable({
+      "pagingType": "full_numbers",
+
+      // Using API in callbacks
+      // "initComplete": function () {
+      //   var api = this.api();
+      //   api.$('td').click(function () {
+      //     api.search(this.innerHTML).draw();
+      //   });
+      // }
+    });
+
+    // Apply the search
+    table.columns().every(function () {
+      var that = this;
+
+      $('input', this.footer()).on('keyup change', function () {
+        if (that.search() !== this.value) {
+          that
+            .search(this.value)
+            .draw();
+        }
+      });
+    });
+  });
+</script>

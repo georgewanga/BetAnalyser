@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+{% block body %}
+
+<form class="form" id="product-form-ajax" method="GET" action="{% url 'home_page:update' %}">
+    {% csrf_token %}
+    <input type="hidden" name="product_id" value="">
+    <button class="btn btn-sm btn-outline-danger" type="submit"> Update? </button>
+</form>
+<form class="form" id="product-form-ajax" method="GET" action="{% url 'home_page:delete' %}">
+    {% csrf_token %}
+    <input type="hidden" name="delete" value="">
+    <button class="btn btn-sm btn-outline-danger" type="submit"> delete all? </button>
+</form>
+
+<table id="example" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th>Match Date</th>
+            <th>Home Team</th>
+            <th>Away Team</th>
+            <th>Last Five Prediction </th>
+            <th>Table Prediction</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for obj in object_list %}
+        <tr>
+            <td>{{ obj.match_date }}</td>
+            <td><a href='{% if obj.soccerway_url %}{{ obj.soccerway_url }}{% else %}#{% endif %}' target="_blank"> {{ obj.home_team }} </a></td>
+            <td><a href='{% if obj.soccerway_url %}{{ obj.soccerway_url }}{% else %}#{% endif %}' target="_blank"> {{ obj.away_team }} </a></td>
+            <td><a href='{% if obj.betin_url %}{{ obj.betin_url }}{% else %}#{% endif %}' target="_blank"> <i data-feather="check"></i>&nbsp; {{ obj.last_five_score }} </a><span class="{% if obj.betin_url %}badge badge-pill badge-success{% endif %}"> {{ obj.p_last_five_score }} </span></td>
+            <td><a href='{% if obj.betin_url %}{{ obj.betin_url }}{% else %}#{% endif %}' target="_blank"> <i data-feather="check"></i>&nbsp; {{ obj.table_score }} </a><span class="{% if obj.betin_url %}badge badge-pill badge-success{% endif %}"> {{ obj.p_table_score }} </span></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Match Date</th>
+            <th>Home Team</th>
+            <th>Away Team</th>
+            <th>Last Five Prediction </th>
+            <th>Table Prediction</th>
+        </tr>
+    </tfoot>
+</table>
+{% endblock body %}
