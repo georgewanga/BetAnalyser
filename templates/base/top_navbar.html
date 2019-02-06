@@ -1,0 +1,134 @@
+{% load static %}
+{% url 'home:index' as home_index %}
+{% url 'products:list' as products_list %}
+{% url 'products:add_item' as add_item %}
+{% url 'accounts:usr_registration' as usr_registration %}
+{% url 'accounts:usr_login' as usr_login %}
+{% url 'usr_logout' as usr_logout %}
+{% url 'cart:home' as cart_url %}
+{% url 'orders:invoice' as invoice_pdf %}
+
+<div class="container-fluid row">
+    <div class="col-12">
+        <div class="mx-auto navbar-light float-left">
+            <a class="navbar-brand" href="{{home_index}}">
+                <span class="h2">{{ company_name }} </span>
+            </a>
+        </div>
+        <div class="navbar-expand float-right">
+            <ul class="navbar-nav mx-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">
+                        <span data-feather="user"></span>
+                        Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">
+                        <span data-feather="message-square"></span>
+                        Messages
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">
+                        <span data-feather="database"></span>
+                        Saved reports
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == usr_logout %}active{% endif %}" href="{{usr_logout}}">
+                        Logout
+                        <span data-feather="log-out"></span>
+                    </a>
+                </li>
+                
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == usr_registration %}active{% endif %}" href="{{usr_registration}}">
+                        <span data-feather="user-plus"></span>
+                        SignUp
+                        {% if request.path == usr_registration %}
+                        <span class="sr-only">(current)</span>
+                        {% endif %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == usr_login %}active{% endif %}" href="{{usr_login}}">
+                        <span data-feather="log-in"></span>
+                        Login
+                        {% if request.path == usr_login %}
+                        <span class="sr-only">(current)</span>
+                        {% endif %}
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="navbar-expand-sm navbar-light justify-content-between bg-light sticky-top">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse custom-red-nav" id="navbarNavDropdown">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == home_index %}active{% endif %}" href="{{home_index}}">
+                        <span data-feather="home"></span>
+                        Home {% if request.path == home_index %}
+                        <span class="sr-only">(current)</span>
+                        {% endif %}
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Pricing</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == add_item %}active{% endif %}" href="{{add_item}}">
+                        <span data-feather="plus"></span>
+                        Add Item {% if request.path == add_item %}
+                        <span class="sr-only">(current)</span>
+                        {% endif %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == invoice_pdf %}active{% endif %}" href="{{invoice_pdf}}">
+                        <span data-feather="printer"></span>
+                        Print Invoice {% if request.path == invoice_pdf %}
+                        <span class="sr-only">(current)</span>
+                        {% endif %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == cart_url %}active{% endif %}" href="{{cart_url}}">
+                        <!-- <span data-feather="shopping-cart"></span> -->
+                        Cart
+                        <span data-feather="shopping-cart"></span>
+                        <span class="badge {% if request.session.cart_items %}badge-danger{% else %}badge-primary{% endif %} badge-pill">
+                            {% if request.session.cart_items %}
+                            {{ request.session.cart_items }}
+                            {% else %}
+                            0
+                            {% endif %}
+                        </span>
+                        {% if request.path == cart_url %}
+                        <span class="sr-only">(current)</span>
+                        {% endif %}
+                    </a>
+                </li>
+            </ul>
+            <div class="mt-2">
+                {% include 'search/snippets/search_form.html'%}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+{% load static %}
+{% url 'products:list' as products_list %}
+{% url 'orders:list' as orders_list %}
+{% url 'dashboard:home' as dashboard_home %}
+
+<!-- Tab panes -->
+<div class="tab-content container-fluid h-100" id="nav-tabContent">
+    <div class=" tab-pane fade h-100 show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="nav flex-column nav-pills custom-red-bg" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link {% if request.path == dashboard_home %}active{% endif %}" href="{{dashboard_home}}">
+                <span data-feather="activity"></span>
+                Dashboard
+                {% if request.path == dashboard_home %}
+                <span class="sr-only">(current)</span>
+                {% endif %}
+            </a>
+            <a class="nav-link {% if request.path == products_list %}active{% endif %}" href="{{products_list}}">
+                <span data-feather="list"></span>
+                Products {% if request.path == products_list %}
+                <span class="sr-only">(current)</span>
+                {% endif %}
+            </a>
+            <a class="nav-link {% if request.path == orders_list %}active{% endif %}" href="{{orders_list}}">
+                <span data-feather="file"></span>
+                Orders
+                {% if request.path == orders_list %}
+                <span class="sr-only">(current)</span>
+                {% endif %}
+            </a>
+            <a class="nav-link disabled" href="#">
+                <span data-feather="users"></span>
+                Customers
+            </a>
+            <a class="nav-link disabled" href="#">
+                <span data-feather="bar-chart-2"></span>
+                Reports
+            </a>
+            <a class="nav-link disabled" href="#">
+                <span data-feather="layers"></span>
+                Integrations
+            </a>
+            <a class="nav-link disabled" href="#">
+                <span data-feather="mail"></span>
+                Contact
+            </a>
+            <a class="nav-link disabled" href="#">
+                <span data-feather="settings"></span>
+                Settings
+            </a>
+        </div>
+    </div>
+</div>
