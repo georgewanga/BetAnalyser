@@ -25,7 +25,7 @@ SECRET_KEY = '*8p#(yn8yu=+&8f_&+@ke^ah3*=lo2-@@dnmxr-302z02d)oz3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['BGBet.pythonanywhere.com','localhost']
 
 
 # Application definition
@@ -122,8 +122,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+STATIC_ROOT = '/home/BGBet/BetAnalyser/static'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR),'static','media_root')
 
 INSTALLED_APPS += [
     'home.apps.HomeConfig',

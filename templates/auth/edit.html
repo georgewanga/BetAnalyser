@@ -1,0 +1,11 @@
+
+<form class="form" id="product-form-ajax" method="GET" action="{% url 'home_page:update' %}">
+    {% csrf_token %}
+    <input type="hidden" name="product_id" value="">
+    <button class="btn btn-sm btn-outline-danger" type="submit"> Update? </button>
+</form>
+<form class="form" id="product-form-ajax" method="GET" action="{% url 'home_page:delete' %}">
+    {% csrf_token %}
+    <input type="hidden" name="delete" value="">
+    <button class="btn btn-sm btn-outline-danger" type="submit"> delete all? </button>
+</form>
